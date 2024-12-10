@@ -14,3 +14,14 @@ jobs:
       # run – произвольная bash-команда
       # ls -la выведет содержимое текущего репозитория
       - run: make say-hello
+      #####вот новое добвленное после урока Экшены########
+      #как я понял это добавление Node
+      # https://github.com/actions/setup-node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm' # ускоряет повторные сборки
+      - run: npm ci
+      - run: npm test
+      ########а это добавление hello-from-hexlet-action###########
+      - uses: hexlet-components/hello-from-hexlet-action@release 
