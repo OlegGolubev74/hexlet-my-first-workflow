@@ -8,22 +8,21 @@ jobs:
     # операционная система для работы воркфлоу
     runs-on: ubuntu-latest
     steps: # список шагов, которые надо выполнить
-    #####вот новое добвленное после урока Экшены########
-      #как я понял это добавление Node
-      # https://github.com/actions/setup-node
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-          cache: 'npm' # ускоряет повторные сборки
-      - run: npm ci
-      - run: npm test
-      ########а это добавление hello-from-hexlet-action###########
-      - uses: hexlet-components/hello-from-hexlet-action@release 
-      ###'это старые данные, которые переносим вниз###############'
       # экшен — выполняет какую-то задачу
       # checkout — клонирует репозиторий
       - uses: actions/checkout@v4
       # run – произвольная bash-команда
       # ls -la выведет содержимое текущего репозитория
+      #вот новые данные, которые встаил после сообщения Глеба от 11.12.2024
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      # make depends on poetry
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          make install
+      #закончил новые данные, которые встаил после сообщения Глеба от 11.12.2024
       - run: make say-hello
       
